@@ -1,8 +1,12 @@
 # MMM-CalendarExtTimeline
 Display current timeline schedules. This is a plugin module for `MMM-CalendarExt`and `MMM-CalendarExt2`
 
+I have added the ability to merge all your calanders into one bar
+
 ## Screenshot ##
 ![screenshot](https://raw.githubusercontent.com/eouia/MMM-CalendarExtTimeline/master/timeline_static.jpg)
+
+can now become
 
 ## Installation ##
 **`MMM-CalendarExt` should be installed together for using this module.**
@@ -34,6 +38,9 @@ git clone https://github.com/eouia/MMM-CalendarExtTimeline
     time_display_section_format: "HH:mm",
     calendars: ["your calendar name", "another name"] //in your `MMM-CalendarExt` configuration
     source: "CALEXT2", // or "CALEXT"
+    // new configs
+    merge_calendars: true, // default is false
+    merged_name: "Calendar", // default is "Events"
   }
 }
 ```
