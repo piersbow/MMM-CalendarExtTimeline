@@ -25,6 +25,8 @@ Module.register("MMM-CalendarExtTimeline",{
 		time_display_section_format: "hh:mm a",
 		calendars: [],
 		source: "CALEXT2", // "CALEXT" or "CALEXT2"
+		merge_calendars: false,
+		merged_name: "Events",
 	},
 
 	start: function() {
@@ -32,7 +34,11 @@ Module.register("MMM-CalendarExtTimeline",{
 		if (this.config.refresh_interval_sec < 60) {
 			this.config.refresh_interval_sec = 60
 		}
-		this.names = this.config.calendars
+		if (this.config.merge_calendars){
+			this.names = [this.config.merged_name]
+		} else {
+			this.names = this.config.calendars
+		}
 	},
 
 	getStyles: function() {
@@ -292,14 +298,18 @@ Module.register("MMM-CalendarExtTimeline",{
 			filter: (e) => {
 				var from = moment().startOf("day").add(this.config.fromNow, 'days').format("X")
 				var to = moment().endOf("day").add(this.config.fromNow, 'days').format("X")
-				if (this.names.indexOf(e.calendarName) < 0) return false
+				if (this.names.indexOf(e.calendarName) < 0 && !this.config.merge_calendars) return false
 				if (e.startDate > to || e.endDate < from) return false
 				return true
 			},
 			callback: (events) => {
 				if (events.length > 0) {
 					for (i = 0; i < events.length; i++) {
-						events[i].name = events[i].calendarName
+						if (this.config.merge_calendars) {
+							events[i].name = this.config.merged_name
+						} else {
+							events[i].name = events[i].calendarName
+						}
 						events[i].startDate = events[i].startDate * 1000
 						events[i].endDate = events[i].endDate * 1000
 						events[i].styleName = events[i].className
