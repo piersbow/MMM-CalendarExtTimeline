@@ -6,8 +6,6 @@ I have added the ability to merge all your calanders into one bar
 ## Screenshot ##
 ![screenshot](https://raw.githubusercontent.com/eouia/MMM-CalendarExtTimeline/master/timeline_static.jpg)
 
-can now become
-
 ## Installation ##
 **`MMM-CalendarExt` should be installed together for using this module.**
 
